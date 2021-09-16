@@ -20,31 +20,31 @@ def get_filters(city, month, day):
         city = input("Write a city name: Chicago, New York City or Washington!").lower()
         if city not in CITY_DATA:
             print("\nInvalid answer\n")
-            continue   
+            continue
         else:
             break
     # TO DO: get user input for month (all, january, february, ... , june)
     while True:
-        time = input("Do you want to filter as month, day, all or none?").lower()               
+        time = input("Do you want to filter as month, day, all or none?").lower()
         if time == 'month':
             month = input("Which month? January, Feburary, March, April, May or June?").lower()
             day = 'all'
             break
-       
-    # TO DO: get user input for day of week (all, monday, tuesday, ... sunday) 
+
+    # TO DO: get user input for day of week (all, monday, tuesday, ... sunday)
         elif time == 'day':
             month = 'all'
             day = input("Which day? Monday, Tuesday, Wednesday, Thursday, Friday, Saturday or Sunday").lower()
             break
-                    
+
         elif time == 'all':
-            month = input("Which month? January, Feburary, March, April, May or June?").lower()           
+            month = input("Which month? January, Feburary, March, April, May or June?").lower()
             day = input("Which day? Monday, Tuesday, Wednesday, Thursday, Friday, Saturday or Sunday").lower()
-            break       
+            break
         elif time == 'none':
             month = 'all'
             day = 'all'
-            break       
+            break
         else:
             input("You wrote the wrong word! Please type it again. month, day, all or none?")
             break
@@ -57,13 +57,11 @@ def get_filters(city, month, day):
 
 def load_data(city, month, day):
     """
-    Loads data for the specified city and filters by month and day if applicable.
+    Return a valid input from the user given an array of possible answers.
     Args:
-        (str) city - name of the city to analyze
-        (str) month - name of the month to filter by, or "all" to apply no month filter
-        (str) day - name of the day of week to filter by, or "all" to apply no day filter
-    Returns:
-        df - Pandas DataFrame containing city data filtered by month and day
+        (str) prompt - prompt with input request
+        (tup) choices - tuple with elements of possible answers
+
     """
     df = pd.read_csv(CITY_DATA[city])
     df['Start Time'] = pd.to_datetime(df['Start Time'])
@@ -74,7 +72,7 @@ def load_data(city, month, day):
         months = ['january', 'february', 'march', 'april', 'may', 'june']
         month = months.index(month) +1
         df = df[df['month'] == month]
-    
+
     if day != 'all':
         df = df[df['day_of_week'] == day.title()]
 
@@ -86,7 +84,7 @@ def time_stats(df):
 
     print('\nCalculating The Most Frequent Times of Travel...\n')
     start_time = time.time()
-      
+
 
     # To Do: display the most common month
     common_month = df['month'].mode()[0]
@@ -103,7 +101,7 @@ def time_stats(df):
     common_hour = df['hour'].mode()[0]
     print(common_hour)
 
-    
+
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)

@@ -9,6 +9,11 @@ Explore US Bikeshare Data
 ### Description
 The user can explore an US bikeshare system database.
 
+### Getting Started
+This program is structured in 2 steps.
+In a first moment, the user selects the filters that are going to be applied to the database. The user can choose many filters.
+After the step, Data Frame is created by the user.
+
 ### Files used
 bykeshare.py
 
