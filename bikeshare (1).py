@@ -20,33 +20,33 @@ def get_filters(city, month, day):
         city = input("Write a city name: Chicago, New York City or Washington!").lower()
         if city not in CITY_DATA:
             print("\nInvalid answer\n")
-            continue   
+            continue
         else:
             break
     # TO DO: get user input for month (all, january, february, ... , june)
     while True:
-        time = input("Do you want to filter as month, day, all or none?").lower()               
+        time = input("Do you want to filter as month, day, all or none?").lower()
         if time == 'month':
             month = input("Which month? January, Feburary, March, April, May or June?").lower()
             day = 'all'
             break
-       
-    # TO DO: get user input for day of week (all, monday, tuesday, ... sunday) 
+
+    # TO DO: get user input for day of week (all, monday, tuesday, ... sunday)
         elif time == 'day':
             month = 'all'
             day = input("Which day? Monday, Tuesday, Wednesday, Thursday, Friday, Saturday or Sunday").lower()
             break
-                    
+
         elif time == 'all':
-            month = input("Which month? January, Feburary, March, April, May or June?").lower()           
+            month = input("Which month? January, Feburary, March, April, May or June?").lower()
             day = input("Which day? Monday, Tuesday, Wednesday, Thursday, Friday, Saturday or Sunday").lower()
-            break       
+            break
         elif time == 'none':
             month = 'all'
             day = 'all'
-            break       
+            break
         else:
-            input("You wrote the wrong word! Please type it again. month, day, all or none?")
+            input("You wrote the wrong word or lack of your data! Please type it again. month, day, all or none?")
             break
 
     print(city)
@@ -74,7 +74,7 @@ def load_data(city, month, day):
         months = ['january', 'february', 'march', 'april', 'may', 'june']
         month = months.index(month) +1
         df = df[df['month'] == month]
-    
+
     if day != 'all':
         df = df[df['day_of_week'] == day.title()]
 
@@ -86,7 +86,7 @@ def time_stats(df):
 
     print('\nCalculating The Most Frequent Times of Travel...\n')
     start_time = time.time()
-      
+
 
     # To Do: display the most common month
     common_month = df['month'].mode()[0]
@@ -103,7 +103,7 @@ def time_stats(df):
     common_hour = df['hour'].mode()[0]
     print(common_hour)
 
-    
+
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
@@ -126,8 +126,8 @@ def station_stats(df):
 
     # To Do: display most frequent combination of start station and end station trip
     df['combination'] = df['Start Station'] + ' to ' + df['End Station']
-    common_combination = df['combination'].mode()[0]
-    print(common_combination)
+    frequent_combination = df['combination'].mode()[0]
+    print(frequent_combination)
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
